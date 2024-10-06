@@ -5,6 +5,8 @@ services:
     volumes:
       -  node-data:/var/subspace:rw
     ports:
+      - "0.0.0.0:30333:30333/tcp" # Remove if using default port
+      - "0.0.0.0:30433:30433/tcp" # Remove if using default port
       - "9944:9944"
       - "9080:9080"
     restart: unless-stopped
@@ -13,6 +15,8 @@ services:
         "run",
         "--chain", "gemini-3h",
         "--base-path", "/var/subspace",
+        "--listen-on", "/ip4/0.0.0.0/tcp/30333",
+        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/30433",
         "--rpc-cors", "all",
         "--rpc-methods", "unsafe",
         "--rpc-listen-on", "0.0.0.0:9944",
