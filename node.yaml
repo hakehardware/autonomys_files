@@ -1,0 +1,36 @@
+services:
+  node:
+    container_name: autonomys_node
+    image: ghcr.io/autonomys/node:<LATEST VERSION>
+    volumes:
+      -  node-data:/var/subspace:rw
+    ports:
+      - "9944:9944"
+      - "9080:9080"
+    restart: unless-stopped
+    command:
+      [
+        "run",
+        "--chain", "gemini-3h",
+        "--base-path", "/var/subspace",
+        "--rpc-cors", "all",
+        "--rpc-methods", "unsafe",
+        "--rpc-listen-on", "0.0.0.0:9944",
+        "--prometheus-listen-on", "0.0.0.0:9080",
+        "--farmer",
+        "--name", "<YOUR NAME>"
+      ]
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.100
+    labels:
+      com.spaceport.name: "Node 1"
+    environment:
+      - <YOUR TIMEZONE>
+
+networks:
+  autonomys-network:
+    external: true
+
+volumes:
+  node-data:
