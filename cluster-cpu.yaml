@@ -1,0 +1,88 @@
+services:
+  cluster_controller:
+    container_name: cluster_controller
+    image: ghcr.io/autonomys/farmer:<LATEST VERSION>
+    restart: unless-stopped
+    volumes:
+      - /path/to/your/controller:/controller
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://nats:4222",
+        "controller",
+        "--base-path", "/controller",
+        "--node-rpc-url", "ws://node:9944"
+      ]
+    labels:
+      com.spaceport.name: "Controller"
+    environment:
+      - TZ=<YOUR TIMEZONE>
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.102
+
+  cluster_cache:
+    container_name: cluster_cache
+    image: ghcr.io/autonomys/farmer:<LATEST VERSION>
+    restart: unless-stopped
+    volumes:
+      - /path/to/your/cache:/cache
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://nats:4222",
+        "cache",
+        "path=/cache,size=<CACHE SIZE>"
+      ]
+    labels:
+      com.spaceport.name: "Cache"
+    environment:
+      - TZ=<YOUR TIMEZONE>
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.103
+        
+  cluster_farmer:
+    container_name: cluster_farmer
+    image: ghcr.io/autonomys/farmer:<LATEST VERSION>
+    restart: unless-stopped
+    volumes:
+      - /path/to/your/farm-1:/farm-1
+      - /path/to/your/farm-2:/farm-2
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://nats:4222",
+        "farmer",
+        "--reward-address", "<YOUR REWARD ADDRESS>",
+        "path=/farm-1,size=<YOUR SIZE>"
+      ]
+    environment:
+      - TZ=<YOUR TIMEZONE>
+    labels:
+      com.spaceport.name: "Farmer"
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.104
+
+  cluster_plotter:
+    container_name: cluster_plotter
+    image: ghcr.io/autonomys/farmer:<LATEST VERSION>
+    restart: unless-stopped
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://nats:4222",
+        "plotter"
+      ]
+    environment:
+      - TZ=<YOUR TIMEZONE>
+    labels:
+      com.spaceport.name: "Plotter"
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.105
+
+networks:
+  autonomys-network:
+    external: true
