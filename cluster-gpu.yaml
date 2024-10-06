@@ -85,15 +85,23 @@ services:
         "cluster",
         "--nats-server", "nats://nats:4222",
         "--prometheus-listen-on", "0.0.0.0:9084",
-        "plotter"
+        "plotter",
       ]
     environment:
       - TZ=<YOUR TIMEZONE>
     labels:
-      com.spaceport.name: "CPU Plotter"
+      com.spaceport.name: "GPU Plotter"
     networks:
       autonomys-network:
         ipv4_address: 172.25.0.105
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    runtime: nvidia
 
 networks:
   autonomys-network:
