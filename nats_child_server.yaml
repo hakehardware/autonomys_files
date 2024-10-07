@@ -1,0 +1,25 @@
+services:
+  nats:
+    image: nats
+    container_name: nats
+    restart: unless-stopped
+    ports:
+      - "4222:4222"
+      - "4248:4248"
+    volumes:
+      - /path/to/your/nats.config:/nats.config:ro
+    command: [
+        "-c", "/nats.config",
+        "-cluster", "nats://0.0.0.0:4248",
+        "-routes", "nats://<IP OF NATS SEED SERVER>",
+        "--cluster_name", "cluster1"
+        ]
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.101
+    labels:
+      com.spaceport.name: "NATs Child Server 1"
+
+networks:
+  autonomys-network:
+    external: true
