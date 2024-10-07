@@ -15,7 +15,8 @@ services:
         "--prometheus-listen-on", "0.0.0.0:9083",
         "farmer",
         "--reward-address", "<YOUR REWARD ADDRESS>",
-        "path=/farm-1,size=<YOUR SIZE>"
+        "path=/farm-1,size=<YOUR SIZE>",
+        "path=/farm-2,size=<YOUR SIZE>",
       ]
     environment:
       - TZ=<YOUR TIMEZONE>
