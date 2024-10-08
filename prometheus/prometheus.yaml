@@ -10,7 +10,7 @@ services:
       - 9090:9090
     networks:
       <NETWORK NAME>:
-        ipv4_address: 172.25.0.10
+        ipv4_address: 172.20.0.10
 
 volumes:
   prometheus_data:
