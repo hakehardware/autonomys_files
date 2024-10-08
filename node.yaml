@@ -6,8 +6,8 @@ services:
     volumes:
       -  node-data:/var/subspace:rw
     ports:
-      - "0.0.0.0:30333:30333/tcp" # Remove if using default port
-      - "0.0.0.0:30433:30433/tcp" # Remove if using default port
+      - "0.0.0.0:30333:30333/tcp"
+      - "0.0.0.0:30433:30433/tcp"
       - "9944:9944"
       - "9080:9080"
     restart: unless-stopped
