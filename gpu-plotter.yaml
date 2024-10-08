@@ -2,6 +2,7 @@ services:
   cluster_plotter:
     container_name: cluster_plotter
     image: ghcr.io/autonomys/farmer:<LATEST VERSION>
+    #platform: linux/amd64
     restart: unless-stopped
     ports:
       - "9084:9084"

@@ -2,6 +2,7 @@ services:
   cluster_farmer:
     container_name: cluster_farmer
     image: ghcr.io/autonomys/farmer:<LATEST VERSION>
+    #platform: linux/amd64
     restart: unless-stopped
     volumes:
       - /path/to/your/farm-1:/farm-1

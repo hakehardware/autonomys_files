@@ -2,6 +2,7 @@ services:
   cluster_controller:
     container_name: cluster_controller
     image: ghcr.io/autonomys/farmer:<LATEST VERSION>
+    #platform: linux/amd64
     restart: unless-stopped
     volumes:
       - /path/to/your/controller:/controller
@@ -28,6 +29,7 @@ services:
   cluster_cache:
     container_name: cluster_cache
     image: ghcr.io/autonomys/farmer:<LATEST VERSION>
+    #platform: linux/amd64
     restart: unless-stopped
     volumes:
       - /path/to/your/cache:/cache
@@ -53,6 +55,7 @@ services:
   cluster_plotter:
     container_name: cluster_plotter
     image: ghcr.io/autonomys/farmer:<LATEST VERSION>
+    #platform: linux/amd64
     restart: unless-stopped
     ports:
       - "9084:9084"

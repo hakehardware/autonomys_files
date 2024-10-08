@@ -3,6 +3,7 @@ services:
     container_name: cluster_cache
     image: ghcr.io/autonomys/farmer:<LATEST VERSION>
     restart: unless-stopped
+    #platform: linux/amd64
     volumes:
       - /path/to/your/cache:/cache
     ports:

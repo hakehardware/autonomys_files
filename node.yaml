@@ -2,6 +2,7 @@ services:
   node:
     container_name: autonomys_node
     image: ghcr.io/autonomys/node:<LATEST VERSION>
+    #platform: linux/amd64
     volumes:
       -  node-data:/var/subspace:rw
     ports:

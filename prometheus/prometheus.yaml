@@ -1,0 +1,20 @@
+services:
+  prometheus: 
+    image: prom/prometheus:latest
+    container_name: prometheus
+    command: "--config.file=/etc/prometheus/prometheus.yaml"
+    volumes:
+      - </PATH/TO/PROMETHEUS.YAML>:/etc/prometheus/prometheus.yaml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - 9090:9090
+    networks:
+      <NETWORK NAME>:
+        ipv4_address: 172.25.0.10
+
+volumes:
+  prometheus_data:
+
+networks:
+  <NETWORK NAME>:
+    external: true
