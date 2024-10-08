@@ -9,7 +9,7 @@ services:
     ]
     networks:
       monitoring-network:
-        ipv4_address: 172.25.0.11
+        ipv4_address: 172.20.0.11
 
 networks:
   monitoring-network:
