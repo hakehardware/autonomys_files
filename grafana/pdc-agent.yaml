@@ -1,0 +1,16 @@
+services:  
+  pdc-agent:
+    image: grafana/pdc-agent:latest
+    container_name: pdc-agent
+    command: [
+      "-token", "<YOUR TOKEN HERE>", 
+      "-cluster", "<YOUR CLUSTER>", 
+      "-gcloud-hosted-grafana-id", "<YOUR ID>"
+    ]
+    networks:
+      monitoring-network:
+        ipv4_address: 172.25.0.11
+
+networks:
+  monitoring-network:
+    external: true
