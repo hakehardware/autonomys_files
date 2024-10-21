@@ -31,7 +31,7 @@ services:
     labels:
       com.spaceport.name: "Node 1"
     environment:
-      - <YOUR TIMEZONE>
+      - TZ=<YOUR TIMEZONE>
 
 networks:
   autonomys-network:
