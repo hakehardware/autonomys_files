@@ -1,0 +1,38 @@
+services:
+  autonomys-node:
+    container_name: autonomys-node
+    image: ghcr.io/autonomys/node:taurus-2024-oct-24 # UPDATE TO LATEST
+    volumes:
+      -  node-data:/var/subspace:rw
+    ports:
+      - "9944:9944"
+      - "9080:9080"
+      - "0.0.0.0:30333:30333/tcp"
+      - "0.0.0.0:30433:30433/tcp"
+    restart: unless-stopped
+    command:
+      [
+        "run",
+        "--chain", "taurus",
+        "--base-path", "/var/subspace",
+        "--rpc-cors", "all",
+        "--rpc-methods", "unsafe",
+        "--rpc-listen-on", "0.0.0.0:9944",
+        "--prometheus-listen-on", "0.0.0.0:9080",
+        "--farmer",
+        "--name", "<NAME> taurus"
+      ]
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.100
+    labels: 
+      com.spaceport.name: "Taurus Node"
+    environment:
+      - TZ=America/Phoenix
+
+networks:
+  autonomys-network:
+    external: true
+
+volumes:
+  node-data:
