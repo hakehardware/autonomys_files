@@ -1,0 +1,82 @@
+services:
+  cluster-controller:
+    container_name: cluster-controller
+    image: ghcr.io/autonomys/farmer:taurus-2024-oct-24 # Update to Latest
+    restart: unless-stopped
+    volumes:
+      - /home/hakehardware/autonomys/controller:/controller  # Use Your Path
+    ports:
+      - "9081:9081"
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://nats:4222", # Update to NATs IP
+        "--prometheus-listen-on", "0.0.0.0:9081", # Optional Metrics
+        "controller",
+        "--base-path", "/controller",
+        "--node-rpc-url", "ws://node:9944" # Update to Node IP
+      ]
+    labels:
+      com.spaceport.name: "Controller" # Add More Descriptive Name
+    environment:
+      - TZ=America/Phoenix # Update to Your TZ
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.102
+
+  cluster-cache:
+    container_name: cluster-cache
+    image: ghcr.io/autonomys/farmer:taurus-2024-oct-24 # Update to Latest
+    restart: unless-stopped
+    volumes:
+      - /home/hakehardware/autonomys/cache:/cache # Use Your Path
+    ports:
+      - "9082:9082"
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://nats:4222", # Update to NATs IP
+        "--prometheus-listen-on", "0.0.0.0:9082", # Optional Metrics
+        "cache",
+        "path=/cache,size=200GiB"
+      ]
+    labels:
+      com.spaceport.name: "Cache" # Add More Descriptive Name
+    environment:
+      - TZ=America/Phoenix # Update to Your TZ
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.103
+
+  cluster-plotter:
+    container_name: cluster-plotter
+    image: ghcr.io/autonomys/farmer:taurus-2024-oct-24 # Update to Latest
+    restart: unless-stopped
+    ports:
+      - "9084:9084"
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://nats:4222", # Update to NATs IP
+        "--prometheus-listen-on", "0.0.0.0:9084", # Optional Metrics
+        "plotter"
+      ]
+    environment:
+      - TZ=America/Phoenix # Update to Your TZ
+    labels:
+      com.spaceport.name: "Plotter" # Add More Descriptive Name
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    runtime: nvidia
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.105
+
+networks:
+  autonomys-network:
+    external: true
