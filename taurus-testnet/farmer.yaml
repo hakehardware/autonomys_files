@@ -1,0 +1,32 @@
+services:
+  cluster-farmer:
+    container_name: cluster-farmer
+    image: ghcr.io/autonomys/farmer:taurus-2024-oct-24 # Update to Latest
+    #platform: linux/amd64
+    restart: unless-stopped
+    volumes:
+      - /path/to/your/farm-1:/farm-1 # Update with your path
+      - /path/to/your/farm-2:/farm-2 # Update with your path
+    ports:
+      - "9083:9083"
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://nats:4222", # Update to NATs IP
+        "--prometheus-listen-on", "0.0.0.0:9083", # Optional Metrics
+        "farmer",
+        "--reward-address", "<YOUR REWARD ADDRESS>", # Update with your reward address
+        "path=/farm-1,size=100GB", # Update with your path & size
+        "path=/farm-2,size=4TB" # Update with your path & size
+      ]
+    environment:
+      - TZ=America/Phoenix # Update to Your TZ
+    labels:
+      com.spaceport.name: "Farmer Taurus"
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.104
+
+networks:
+  autonomys-network:
+    external: true
