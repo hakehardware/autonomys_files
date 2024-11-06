@@ -2,7 +2,6 @@ services:
   cluster-farmer:
     container_name: cluster-farmer
     image: ghcr.io/autonomys/farmer:taurus-2024-oct-24 # Update to Latest
-    #platform: linux/amd64
     restart: unless-stopped
     volumes:
       - /path/to/your/farm-1:/farm-1 # Update with your path
