@@ -1,3 +1,7 @@
+# Author: Hake Hardware
+# Chain: Mainnet
+# Version: 1.0.0
+
 # Ensure these ports are forwarded and do not have any conflicts
 $LISTEN_PORT = "30333"
 $DSN_PORT = "30433"
@@ -22,4 +26,4 @@ $CHAIN = "mainnet"
   --name "${NAME}" `
   --prometheus-listen-on ${PROMETHEUS_IP}:${PROMETHEUS_PORT} `
   --listen-on "/ip4/0.0.0.0/tcp/${LISTEN_PORT}" `
-  --dsn-listen-on "/ip4/0.0.0.0/tcp/${DSN_PORT}"
+  --dsn-listen-on "/ip4/0.0.0.0/tcp/${DSN_PORT}" | Tee-Object -FilePath "node.log" -Append

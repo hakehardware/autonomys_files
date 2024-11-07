@@ -1,3 +1,7 @@
+# Author: Hake Hardware
+# Chain: Mainnet
+# Version: 1.0.0
+
 # Ensure these ports are forwarded and do not have any conflicts
 $LISTEN_PORT = "30333"
 $DSN_PORT = "30433"
@@ -25,4 +29,4 @@ $CHAIN = "mainnet"
   --dsn-listen-on "/ip4/0.0.0.0/tcp/${DSN_PORT}" `
   --rpc-listen-on 0.0.0.0:9944 `
   --rpc-methods unsafe `
-  --rpc-cors all
+  --rpc-cors all | Tee-Object -FilePath "node.log" -Append
