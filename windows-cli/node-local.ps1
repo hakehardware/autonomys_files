@@ -9,8 +9,8 @@ $PROMETHEUS_PORT = "9080"
 # Update to whatever name you would like
 $NAME = "hakehardware-tutorial"
 
-# Defaults to the same directory the Node was launched from
-$BASE_PATH = $(Get-Location)
+# Defaults to the same directory the Node was launched from. If a secondary drive is to be used update this with the path to the secondary drive (should be an SSD)
+$BASE_PATH = "$(Get-Location)"
 
 # Default is mainnet, can also use "taurus" for testnet. Data between the two chains is not compatible and will require a wipe
 $CHAIN = "mainnet"
