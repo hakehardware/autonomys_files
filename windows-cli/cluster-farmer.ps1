@@ -9,7 +9,9 @@ $NATS_PORT = "4222"
 # Set the Prometheus IP and Port. If Prometheus is running on a different host, set the internal IP of the host running Prometheus here
 $PROMETHEUS_IP = "127.0.0.1"
 $PROMETHEUS_PORT = "9083"
-$REWARD_ADDRESS = "YOUR REWARD ADDRESS"
+
+# Update with your reward address
+$REWARD_ADDRESS = "sucFPpS5i65LRAPX1eJxgiLCN6KZS7LA4bSV57DpkuWYkrpkc"
 
 # Run the subspace-farmer command with the provided values
 .\subspace-farmer-windows-x86_64-skylake-mainnet-2024-nov-06.exe cluster `

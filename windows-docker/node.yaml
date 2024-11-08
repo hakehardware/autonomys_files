@@ -1,6 +1,6 @@
 services:
   node:
-    container_name: autonomys_node
+    container_name: autonomys-node
     image: ghcr.io/autonomys/node:mainnet-2024-nov-06
     volumes:
       -  node-data-mainnet:/var/subspace:rw
