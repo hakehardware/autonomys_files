@@ -2,9 +2,11 @@
 # Chain: Mainnet
 # Version: 1.0.0
 
-# Define variables
+# Keep defaults if Prometheus is running on the same host. Otherwise use the internal IP of the host running Prometheus
 $PROMETHEUS_IP = "127.0.0.1"
 $PROMETHEUS_PORT = "9083"
+
+# Update with your reward address
 $REWARD_ADDRESS = "sucFPpS5i65LRAPX1eJxgiLCN6KZS7LA4bSV57DpkuWYkrpkc"
 
 # Run the command, outputting to both the log file and console
