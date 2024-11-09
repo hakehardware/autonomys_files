@@ -4,7 +4,7 @@ services:
     image: ghcr.io/autonomys/farmer:mainnet-2024-nov-06 # Update to Latest
     restart: unless-stopped
     volumes:
-      - controller-data:/controller
+      - /c/autonomys/controller:/controller
     ports:
       - "9081:9081"
     command:
@@ -27,6 +27,3 @@ services:
 networks:
   autonomys-network:
     external: true
-
-volumes:
-  controller-data:

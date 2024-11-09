@@ -4,7 +4,7 @@ services:
     image: ghcr.io/autonomys/farmer:mainnet-2024-nov-06 # Update to Latest
     restart: unless-stopped
     volumes:
-      - cache-data:/cache
+      - /c/autonomys/cache:/cache
     ports:
       - "9082:9082"
     command:
@@ -26,6 +26,3 @@ services:
 networks:
   autonomys-network:
     external: true
-
-volumes:
-  cache-data:
