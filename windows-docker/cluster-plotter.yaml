@@ -1,0 +1,25 @@
+services:
+  cluster-plotter:
+    container_name: cluster-plotter
+    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-06 # Update to Latest
+    restart: unless-stopped
+    ports:
+      - "9084:9084"
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://172.25.0.101:4222", # If NATS is not on this host, update to IP of host running NATS
+        "--prometheus-listen-on", "0.0.0.0:9084", # Optional Metrics
+        "plotter"
+      ]
+    environment:
+      - TZ=America/Phoenix # Update to Your TZ
+    labels:
+      com.spaceport.name: "Cluster Plotter"
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.105
+
+networks:
+  autonomys-network:
+    external: true
