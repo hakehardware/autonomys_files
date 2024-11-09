@@ -22,6 +22,13 @@ services:
       - TZ=America/Phoenix # Update to Your TZ
     labels:
       com.spaceport.name: "Cluster Farmer"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     networks:
       autonomys-network:
         ipv4_address: 172.25.0.104  

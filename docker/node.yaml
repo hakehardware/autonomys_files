@@ -1,0 +1,40 @@
+services:
+  node:
+    container_name: autonomys-node
+    image: ghcr.io/autonomys/node:mainnet-2024-nov-06 # Ensure the latest version
+    volumes:
+      -  node-data-mainnet:/var/subspace:rw
+    ports:
+      - "9944:9944"
+      - "9080:9080"
+      - "0.0.0.0:30333:30333/tcp"
+      - "0.0.0.0:30433:30433/tcp"
+    restart: unless-stopped
+    command:
+      [
+        "run",
+        "--chain", "mainnet",
+        "--base-path", "/var/subspace",
+        "--listen-on", "/ip4/0.0.0.0/tcp/30333",
+        "--dsn-listen-on", "/ip4/0.0.0.0/tcp/30433",
+        "--rpc-cors", "all",
+        "--rpc-methods", "unsafe",
+        "--rpc-listen-on", "0.0.0.0:9944",
+        "--prometheus-listen-on", "0.0.0.0:9080",
+        "--farmer",
+        "--name", "hakehardware tutorial" # Update
+      ]
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.100
+    labels:
+      com.spaceport.name: "Mainnet Node"
+    environment:
+      - TZ=America/Phoenix # Update
+
+networks:
+  autonomys-network:
+    external: true
+
+volumes:
+  node-data-mainnet:
