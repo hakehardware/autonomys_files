@@ -1,10 +1,10 @@
 services:
   farmer:
     container_name: autonomys-farmer
-    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-06
+    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-06 # Update to Latest
     volumes:
-      - /z:/farm-1
-      - /y:/farm-2
+      - /z:/farm-1 # Update to Path of Farm
+      - /y:/farm-2 # Duplicate for each farm. Remove if only 1 farm exists
     ports:
       - "0.0.0.0:30533:30533/tcp"
     restart: unless-stopped
@@ -15,8 +15,8 @@ services:
         "--listen-on", "/ip4/0.0.0.0/tcp/30533",
         "--reward-address", "sucFPpS5i65LRAPX1eJxgiLCN6KZS7LA4bSV57DpkuWYkrpkc",
         "--prometheus-listen-on", "0.0.0.0:9081",
-        "path=/farm-1,size=125G",
-        "path=/farm-2,size=125G"
+        "path=/farm-1,size=125G", # Update to Path of Farm
+        "path=/farm-2,size=125G" # Duplicate for each farm. Remove if only 1 farm exists
       ]
     networks:
       autonomys-network:
@@ -24,7 +24,7 @@ services:
     labels:
       com.spaceport.name: "Mainnet Farmer"
     environment:
-      - TZ=America/Phoenix
+      - TZ=America/Phoenix # Update
 
 networks:
   autonomys-network:

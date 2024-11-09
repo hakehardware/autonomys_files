@@ -1,0 +1,30 @@
+services:
+  cluster-controller:
+    container_name: cluster_controller
+    image: ghcr.io/autonomys/farmer:<LATEST VERSION>
+    #platform: linux/amd64
+    restart: unless-stopped
+    volumes:
+      - /path/to/your/controller:/controller
+    ports:
+      - "9081:9081"
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://nats:4222",
+        "--prometheus-listen-on", "0.0.0.0:9081",
+        "controller",
+        "--base-path", "/controller",
+        "--node-rpc-url", "ws://node:9944"
+      ]
+    labels:
+      com.spaceport.name: "Controller"
+    environment:
+      - TZ=<YOUR TIMEZONE>
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.102
+
+networks:
+  autonomys-network:
+    external: true
