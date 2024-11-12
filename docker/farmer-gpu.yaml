@@ -1,3 +1,5 @@
+# Autonomys Farmer w/ GPU Enabled
+
 services:
   farmer:
     container_name: autonomys-farmer
