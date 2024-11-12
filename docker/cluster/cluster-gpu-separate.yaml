@@ -2,7 +2,7 @@
 services:
   cluster-controller:
     container_name: cluster-controller
-    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-05
+    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-06 # Update to Latest
     restart: unless-stopped
     volumes:
       - /home/hakehardware/autonomys/controller:/controller
@@ -27,7 +27,7 @@ services:
 
   cluster-cache:
     container_name: cluster-cache
-    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-05
+    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-06 # Update to Latest
     restart: unless-stopped
     volumes:
       - /home/hakehardware/autonomys/cache:/cache
@@ -51,7 +51,7 @@ services:
 
   cluster-plotter:
     container_name: cluster-plotter
-    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-05
+    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-06 # Update to Latest
     restart: unless-stopped
     ports:
       - "9084:9084"
@@ -81,8 +81,7 @@ services:
 
   cluster-farmer:
     container_name: cluster-farmer
-    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-05
-    #platform: linux/amd64
+    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-06 # Update to Latest
     restart: unless-stopped
     volumes:
       - /media/autonomys/farm-78440:/farm-78440 # Update with your path
