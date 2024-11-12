@@ -1,1 +1,39 @@
 # Dedicated Cluster Controller
+services:
+  cluster-controller:
+    container_name: cluster-controller
+    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-05
+    restart: unless-stopped
+    volumes:
+      - /home/hakehardware/autonomys/controller:/controller
+    ports:
+      - "9081:9081"
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://nats:4222",
+        "--prometheus-listen-on", "0.0.0.0:9081",
+        "controller",
+        "--base-path", "/controller",
+        "--node-rpc-url", "ws://node:9944",
+        "--",
+        "cache",
+        "path=/cache,size=200GiB",
+        "--",
+        "farmer",
+        "--reward-address", "suei8oJGcc9vq2pqWfrKDAggPrUWyow5JhHgFrzRM8JbqWN19", # Update with your reward address
+        "path=/farm-78440,size=929GiB", # Update with your path & size
+        "--",
+        "plotter"
+      ]
+    labels:
+      com.spaceport.name: "Flexo Controller"
+    environment:
+      - TZ=America/Phoenix
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.102
+
+networks:
+  autonomys-network:
+    external: true

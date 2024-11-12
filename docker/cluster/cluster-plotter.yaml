@@ -1,1 +1,27 @@
 # Cluster Plotter
+services:
+  cluster-plotter:
+    container_name: cluster-plotter
+    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-05
+    restart: unless-stopped
+    ports:
+      - "9084:9084"
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://nats:4222",
+        "--prometheus-listen-on", "0.0.0.0:9084",
+        "plotter"
+      ]
+    environment:
+      - TZ=America/Phoenix
+    labels:
+      com.spaceport.name: "Flexo Plotter"
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.105
+
+
+networks:
+  autonomys-network:
+    external: true
