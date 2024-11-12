@@ -29,7 +29,7 @@ services:
       autonomys-network:
         ipv4_address: 172.25.0.100
     labels:
-      com.spaceport.name: "Mainnet Node"
+      com.spaceport.name: "Node"
     environment:
       - TZ=America/Phoenix # Update
 
@@ -59,7 +59,7 @@ services:
       autonomys-network:
         ipv4_address: 172.25.0.101
     labels:
-      com.spaceport.name: "Mainnet Farmer"
+      com.spaceport.name: "Farmer"
     environment:
       - TZ=America/Phoenix # Update
 

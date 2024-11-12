@@ -27,7 +27,7 @@ services:
         "plotter"
       ]
     labels:
-      com.spaceport.name: "Flexo Controller"
+      com.spaceport.name: "Controller"
     environment:
       - TZ=America/Phoenix
     networks:

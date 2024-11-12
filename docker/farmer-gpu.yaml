@@ -23,15 +23,8 @@ services:
     networks:
       autonomys-network:
         ipv4_address: 172.25.0.101
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
     labels:
-      com.spaceport.name: "Mainnet Farmer"
+      com.spaceport.name: "Farmer"
     environment:
       - TZ=America/Phoenix # Update
 

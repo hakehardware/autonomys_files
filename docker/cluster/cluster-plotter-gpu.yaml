@@ -2,7 +2,7 @@
 services:
   cluster-plotter:
     container_name: cluster-plotter
-    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-05
+    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-06
     restart: unless-stopped
     ports:
       - "9084:9084"
@@ -16,7 +16,7 @@ services:
     environment:
       - TZ=America/Phoenix
     labels:
-      com.spaceport.name: "Flexo Plotter"
+      com.spaceport.name: "Plotter"
     deploy:
       resources:
         reservations:

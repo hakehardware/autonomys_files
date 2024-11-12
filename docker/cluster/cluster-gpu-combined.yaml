@@ -1,1 +1,49 @@
 # Autonomys cluster w/ GPU enabled in a single container
+services:
+  cluster-controller:
+    container_name: cluster-controller
+    image: ghcr.io/autonomys/farmer:mainnet-2024-nov-06 # Update to Latest
+    restart: unless-stopped
+    volumes:
+      - /home/hakehardware/autonomys/controller:/controller # Update with path to controller folder
+      - /home/hakehardware/autonomys/cache:/cache # Update with path to cache folder
+      - /media/autonomys/farm-78440:/farm-78440 # Update with your path - Duplicate  for Each Disk
+    ports:
+      - "9081:9081"
+    command:
+      [
+        "cluster",
+        "--nats-server", "nats://nats:4222",
+        "--prometheus-listen-on", "0.0.0.0:9081",
+        "controller", # Start Controller
+        "--base-path", "/controller",
+        "--node-rpc-url", "ws://node:9944"
+        "--", # Start Cache
+        "cache",
+        "path=/cache,size=200GiB",
+        "--", # Start Farmer
+        "farmer",
+        "--reward-address", "suei8oJGcc9vq2pqWfrKDAggPrUWyow5JhHgFrzRM8JbqWN19", # Update with your reward address
+        "path=/farm-78440,size=929GiB", # Update with your path & size
+        "--", # Start Plotter
+        "plotter"
+      ]
+    labels:
+      com.spaceport.name: "Cluster"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    runtime: nvidia
+    environment:
+      - TZ=America/Phoenix
+    networks:
+      autonomys-network:
+        ipv4_address: 172.25.0.102
+
+networks:
+  autonomys-network:
+    external: true
